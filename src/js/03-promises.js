@@ -13,14 +13,15 @@ refs.formEl.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
 
-  const delay = +refs.delayEl.value;
-  const step = +refs.stepEl.value;
-  const amount = +refs.amountEl.value;
+  let delay = +refs.delayEl.value;
+  let step = +refs.stepEl.value;
+  let amount = +refs.amountEl.value;
 
-  for (let i = 1; i < amount; i++) {
-    const steps = delay + step * i;
+  for (let i = 1; i <= amount; i++) {
+    const steps = delay + step * (i - 1);
     createPromise(i, steps).then(onSuccess).catch(onError);
   }
+  refs.formEl.reset();
 }
 
 function createPromise(position, delay) {
